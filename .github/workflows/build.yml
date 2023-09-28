@@ -26,11 +26,13 @@ jobs:
         - {
             name: "msvc2019",
             generator:  "Visual Studio 16 2019",
+            extra: "-A x64",
             on: "windows-2019"
           }
         - {
             name: "msvc2022",
             generator:  "Visual Studio 17 2022",
+            extra: "-A x64",
             on: "windows-latest"
           }
 
@@ -71,7 +73,7 @@ jobs:
             ${{ github.workspace }}\cmake-3.24.0-windows-x86_64\bin;
             set CD_LINUX=%CD:\=/%
             cd dcmtk &&^
-            cmake.exe -G "${{ matrix.compiler.generator }}" -A x64 ^
+            cmake.exe -G "${{ matrix.compiler.generator }}" ${{ matrix.compiler.extra }} ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DBUILD_SHARED_LIBS=OFF ^
             -DCMAKE_INSTALL_PREFIX="cmake-build/${{ env.cmakeInstallationPath }}" -B./cmake-build &&^
