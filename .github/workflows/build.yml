@@ -14,26 +14,30 @@ jobs:
         - {
             name: "x86_64-8.1.0-release-posix-seh-rt_v6-rev0",
             url: "https://github.com/dirkarnez/cpp-tools/raw/main/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z",
-            generator: "MinGW Makefiles"
+            generator: "MinGW Makefiles",
+            on: "windows-latest"
           }
         - {
             name: "winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64-9.0.0-r1",
             url: "https://github.com/brechtsanders/winlibs_mingw/releases/download/11.2.0-12.0.1-9.0.0-r1/winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64-9.0.0-r1.zip",
-            generator: "MinGW Makefiles"
+            generator: "MinGW Makefiles",
+            on: "windows-latest"
           }
         - {
             name: "msvc2019",
-            generator:  "Visual Studio 16 2019"
+            generator:  "Visual Studio 16 2019",
+            on: "windows-2019"
           }
         - {
             name: "msvc2022",
-            generator:  "Visual Studio 17 2022"
+            generator:  "Visual Studio 17 2022",
+            on: "windows-latest"
           }
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.compiler.on }}
     env:
-      libraryName: libsoda-cxx
-      cmakeInstallationPath: libsoda-cxx-installation
+      libraryName: dcmtk
+      cmakeInstallationPath: dcmtk-installation
       tagName: DCMTK-3.6.7
     steps:
       - uses: actions/checkout@v4
