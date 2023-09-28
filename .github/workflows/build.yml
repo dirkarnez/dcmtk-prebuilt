@@ -83,12 +83,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "dcmtk/cmake-build"
+          directory: "dcmtk/cmake-build/${{ env.cmakeInstallationPath }}"
           filename: "dcmtk-${{ github.ref_name }}-${{ matrix.compiler.name }}.zip"
         
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dcmtk/cmake-build/dcmtk-${{ github.ref_name }}-${{ matrix.compiler.name }}.zip"
+          artifacts: "dcmtk/cmake-build/${{ env.cmakeInstallationPath }}/dcmtk-${{ github.ref_name }}-${{ matrix.compiler.name }}.zip"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
